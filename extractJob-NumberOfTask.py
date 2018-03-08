@@ -44,7 +44,7 @@ for file_name in os.listdir(folder_path):
         .load("%s%s"%(folder_path,file_name))
     )
     df.createOrReplaceTempView("dataFrame")
-    sumCPUUsage = sql_context.sql("SELECT JobId, count(taskIndex) from dataFrame groupby Jobid")
+    sumCPUUsage = sql_context.sql("SELECT JobId, count(taskIndex) from dataFrame group by Jobid")
     # sumCPUUsage.show(5000)
     schema_df = ["Jobid","numberOfTaskIndex"]
     sumCPUUsage.toPandas().to_csv('thangbk2209/Predictive_Scaling/results/%s'%(file_name), index=False, header=None)
