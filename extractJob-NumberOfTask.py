@@ -47,6 +47,6 @@ for file_name in os.listdir(folder_path):
     sumCPUUsage = sql_context.sql("SELECT JobId, count(taskIndex) from dataFrame groupby Jobid")
     # sumCPUUsage.show(5000)
     schema_df = ["Jobid","numberOfTaskIndex"]
-    sumCPUUsage.toPandas().to_csv('thangbk2209/Predictive_Scaling/%s'%(file_name), index=False, header=None)
+    sumCPUUsage.toPandas().to_csv('thangbk2209/Predictive_Scaling/results/%s'%(file_name), index=False, header=None)
     # sumCPUUsage.write.save("results/test.csv", format="csv", columns=schema_df)
 sc.stop()
