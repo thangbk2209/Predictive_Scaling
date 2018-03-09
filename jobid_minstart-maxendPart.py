@@ -47,9 +47,9 @@ for jobid in JobIdArr:
             .load("%s%s"%(folder_path,file_name))
         )
         df.createOrReplaceTempView("dataFrame")
-        sumCPUUsage = sql_context.sql("SELECT JobId, min(startTime), max(endTime) from dataFrame where Jobid = '%s' " %jobid)
-        # sumCPUUsage.show(5000)
-        schema_df = ["Jobid","numberOfTaskIndex"]
+        sumCPUUsage = sql_context.sql("SELECT JobId, startTime, endTime, meanCPUUsage,AssignMem,mean_diskIO_time,mean_local_disk_space   from dataFrame where Jobid = '%s' " %jobid)
+        # sumCPUUsage.show(5000)"
+        schema_df = ["JobId", "startTime", "endTime", "meanCPUUsage","AssignMem","mean_diskIO_time","mean_local_disk_space"]
         sumCPUUsage.toPandas().to_csv('thangbk2209/JobId_time/%s/%s'%(jobid, file_name), index=False, header=None)
         # sumCPUUsage.write.save("results/test.csv", format="csv", columns=schema_df)
 sc.stop()
