@@ -23,7 +23,7 @@ df = (
     .load("%s%s"%(folder_path,file_name))
 )
 df.createOrReplaceTempView("dataFrame")
-sumCPUUsage = sql_context.sql("SELECT JobId, sum(taskIndex) from dataFrame group by Jobid")
+sumCPUUsage = sql_context.sql("SELECT JobId, sum(taskIndex) as numberOfTask from dataFrame group by Jobid order by numberOfTask DESC")
 # sumCPUUsage.show(5000)
 schema_df = ["Jobid","numberOfTaskIndex"]
 sumCPUUsage.toPandas().to_csv('thangbk2209/Predictive_Scaling/results/%s'%(file_name), index=False, header=None)
