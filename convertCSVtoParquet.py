@@ -10,8 +10,8 @@ if __name__ == "__main__":
     schema = StructType([StructField('startTime', StringType(), True),
                          StructField('endTime', StringType(), True),
                          StructField('JobId', StringType(), True),
-                         StructField('taskIndex', LongType(), True),
-                         StructField('machineId', LongType(), True),
+                         StructField('taskIndex', StringType(), True),
+                         StructField('machineId', StringType(), True),
                          StructField('meanCPUUsage', FloatType(), True),
                          # canonical memory usage
                          StructField('CMU', FloatType(), True),
