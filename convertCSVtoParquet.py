@@ -31,6 +31,7 @@ if __name__ == "__main__":
                          StructField('agg_type', StringType(), True),
                          StructField('sampled_cpu_usage', StringType(), True)])
     for file_name in os.listdir(folder_path):
+        file_parquet_name = file.split('.')[0]
         rdd = sc.textFile("%s%s"%(folder_path,file_name)).map(lambda line: line.split(","))
-    df = sqlContext.createDataFrame(rdd, schema)
-    df.write.parquet('/home/hunter/GoogleCluster/task_usage_parquet')
+        df = sqlContext.createDataFrame(rdd, schema)
+        df.write.parquet('/home/hunter/GoogleCluster/task_usage_parquet/%s'%(file_parquet_name))
