@@ -41,7 +41,7 @@ dataSchema = StructType([StructField('startTime', StringType(), True),
 numberOfJob = 0
 for jobid in JobIdArr:
     numberOfJob += 1
-    if numberOfJob <=5:
+    if numberOfJob <=6:
         continue
     
     if numberOfJob <= 1990: 
