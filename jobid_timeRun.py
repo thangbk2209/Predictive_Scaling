@@ -10,10 +10,10 @@ import os
 sc = SparkContext(appName="Task_usage")
 sql_context = SQLContext(sc)
 colnames = ['jobId','numberOfTask'] 
-df = read_csv('/mnt/volume/ggcluster/spark-2.1.1-bin-hadoop2.7/thangbk2209/Predictive_Scaling/results/JobID-numberOfTask.csv', header=None, index_col=False, names=colnames, usecols=[0], engine='python')
+df = read_csv('/home/hunter/thangbk2209/Predictive_Scaling/results/JobID-numberOfTask.csv', header=None, index_col=False, names=colnames, usecols=[0], engine='python')
 JobIdArr = df['jobId'].values
 # folder_path ='/mnt/volume/ggcluster/clusterdata-2011-2/task_usage/'
-folder_path = '/mnt/volume/ggcluster/clusterdata-2011-2/task_usage/'
+folder_path = '/home/hunter/GoogleCluster/task_usage_extract/'
 
 dataSchema = StructType([StructField('startTime', StringType(), True),
                          StructField('endTime', StringType(), True),
@@ -38,18 +38,21 @@ dataSchema = StructType([StructField('startTime', StringType(), True),
                          StructField('sampling_portion', FloatType(), True),
                          StructField('agg_type', FloatType(), True),
                          StructField('sampled_cpu_usage', FloatType(), True)])
+nuberOfJob = 0
 for jobid in JobIdArr:
-    for file_name in os.listdir(folder_path):
-        df = (
-            sql_context.read
-            .format('com.databricks.spark.csv')
-            .schema(dataSchema)
-            .load("%s%s"%(folder_path,file_name))
-        )
-        df.createOrReplaceTempView("dataFrame")
-        sumCPUUsage = sql_context.sql("SELECT JobId, startTime, endTime, meanCPUUsage,AssignMem,mean_diskIO_time,mean_local_disk_space   from dataFrame where Jobid = '%s' " %jobid)
-        # sumCPUUsage.show(5000)"
-        schema_df = ["JobId", "startTime", "endTime", "meanCPUUsage","AssignMem","mean_diskIO_time","mean_local_disk_space"]
-        sumCPUUsage.toPandas().to_csv('thangbk2209/JobId_time/%s_%s'%(jobid, file_name), index=False, header=None)
-        # sumCPUUsage.write.save("results/test.csv", format="csv", columns=schema_df)
+    numberOfJob += 1
+    if numberOfJob <= 1990: 
+        for file_name in os.listdir(folder_path):
+            df = (
+                sql_context.read
+                .format('com.databricks.spark.csv')
+                .schema(dataSchema)
+                .load("%s%s"%(folder_path,file_name))
+            )
+            df.createOrReplaceTempView("dataFrame")
+            sumCPUUsage = sql_context.sql("SELECT JobId, machineId, startTime, endTime, meanCPUUsage,AssignMem,mean_diskIO_time,mean_local_disk_space   from dataFrame where Jobid = '%s' " %jobid)
+            # sumCPUUsage.show(5000)"
+            schema_df = ["JobId","machineId" ,"startTime", "endTime", "meanCPUUsage","AssignMem","mean_diskIO_time","mean_local_disk_space"]
+            sumCPUUsage.toPandas().to_csv('/home/hunter/thangbk2209/JobId_time/%s_%s'%(jobid, file_name), index=False, header=None)
+            # sumCPUUsage.write.save("results/test.csv", format="csv", columns=schema_df)
 sc.stop()
