@@ -10,7 +10,7 @@ import os
 sc = SparkContext(appName="Task_usage")
 sql_context = SQLContext(sc)
 colnames = ['jobId','numberOfTask'] 
-df = read_csv('/home/hunter/thangbk2209/Predictive_Scaling/results/JobID-numberOfTask.csv', header=None, index_col=False, names=colnames, usecols=[0], engine='python')
+df = read_csv('/home/hunter/spark/spark-2.2.0-bin-hadoop2.7/thangbk2209/Predictive_Scaling/results/JobID-numberOfTask.csv', header=None, index_col=False, names=colnames, usecols=[0], engine='python')
 JobIdArr = df['jobId'].values
 # folder_path ='/mnt/volume/ggcluster/clusterdata-2011-2/task_usage/'
 folder_path = '/home/hunter/GoogleCluster/task_usage_extract/'
@@ -53,6 +53,6 @@ for jobid in JobIdArr:
             sumCPUUsage = sql_context.sql("SELECT JobId, machineId, startTime, endTime, meanCPUUsage,AssignMem,mean_diskIO_time,mean_local_disk_space   from dataFrame where Jobid = '%s' " %jobid)
             # sumCPUUsage.show(5000)"
             schema_df = ["JobId","machineId" ,"startTime", "endTime", "meanCPUUsage","AssignMem","mean_diskIO_time","mean_local_disk_space"]
-            sumCPUUsage.toPandas().to_csv('/home/hunter/thangbk2209/JobId_time/%s_%s'%(jobid, file_name), index=False, header=None)
+            sumCPUUsage.toPandas().to_csv('/home/hunter/spark/spark-2.2.0-bin-hadoop2.7/thangbk2209/JobId_time/%s_%s'%(jobid, file_name), index=False, header=None)
             # sumCPUUsage.write.save("results/test.csv", format="csv", columns=schema_df)
 sc.stop()
