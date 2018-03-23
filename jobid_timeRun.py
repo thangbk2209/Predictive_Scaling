@@ -41,7 +41,7 @@ dataSchema = StructType([StructField('startTime', StringType(), True),
 numberOfJob = 0
 for jobid in JobIdArr:
     numberOfJob += 1
-    if jobid == 6336594489 || jobid == 2902878580:
+    if jobid == 6336594489 or jobid == 2902878580:
         break;
     
     if numberOfJob <= 1990: 
