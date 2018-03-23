@@ -38,7 +38,7 @@ dataSchema = StructType([StructField('startTime', StringType(), True),
                          StructField('sampling_portion', FloatType(), True),
                          StructField('agg_type', FloatType(), True),
                          StructField('sampled_cpu_usage', FloatType(), True)])
-nuberOfJob = 0
+numberOfJob = 0
 for jobid in JobIdArr:
     numberOfJob += 1
     if numberOfJob <= 1990: 
