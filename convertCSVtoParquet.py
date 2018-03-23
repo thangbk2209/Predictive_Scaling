@@ -9,7 +9,7 @@ if __name__ == "__main__":
     folder_path = '/home/hunter/GoogleCluster/task_usage_extract/'
     schema = StructType([StructField('startTime', StringType(), True),
                          StructField('endTime', StringType(), True),
-                         StructField('JobId', LongType(), True),
+                         StructField('JobId', StringType(), True),
                          StructField('taskIndex', LongType(), True),
                          StructField('machineId', LongType(), True),
                          StructField('meanCPUUsage', FloatType(), True),
