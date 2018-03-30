@@ -9,7 +9,7 @@ df = read_csv('/home/hunter/spark/spark-2.2.0-bin-hadoop2.7/thangbk2209/Predicti
 JobIdArr = df['jobId'].values
 numberOfJob = 0
 for jobid in JobIdArr:
-  numberOfJob ++
+  numberOfJob += 1
   arrVectorJobid = []
   if numberOfJob == 284:
     break
