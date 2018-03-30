@@ -20,8 +20,8 @@ for jobid in JobIdArr:
             arrVectorJobid.append(0)
         else:
             arrVectorJobid.append(1)
-        arrVectorJobid = np.array(arrVectorJobid)
-        arrVectorJobid = np.reshape(arrVectorJobid, (1, arrVectorJobid.shape[0]))
+    arrVectorJobid = np.array(arrVectorJobid)
+    arrVectorJobid = np.reshape(arrVectorJobid, (1, arrVectorJobid.shape[0]))
 
     newDf = pd.DataFrame(arrVectorJobid)
 # df1 = newDf.replace(np.nan, 0, regex=True)
