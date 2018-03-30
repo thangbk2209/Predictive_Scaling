@@ -17,9 +17,11 @@ for jobid in JobIdArr:
         file_name = str(jobid)+"_part-00"+str(partNumber).zfill(3)+"-of-00500.csv"
         print file_name
         if os.stat(file_name).st_size == 0:
-            arrVectorJobid[0].append(0)
+            arrVectorJobid.append(0)
         else:
-            arrVectorJobid[0].append(1)
+            arrVectorJobid.append(1)
+        arrVectorJobid = np.reshape( arrVectorJobid, (trainX.shape[0], 1))
+
     newDf = pd.DataFrame(arrVectorJobid)
 # df1 = newDf.replace(np.nan, 0, regex=True)
     newDf.to_csv('/home/hunter/spark/spark-2.2.0-bin-hadoop2.7/thangbk2209/Predictive_Scaling/results/%s.csv'%(jobid), index=False, header=None)
