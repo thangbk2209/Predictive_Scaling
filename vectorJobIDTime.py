@@ -14,7 +14,7 @@ for jobid in JobIdArr:
     if numberOfJob == 284:
         break
     for partNumber in range(0,500):
-        file_name = string(jobid)+"_part-00"+str(partNumber).zfill(3)+"-of-00500.csv"
+        file_name = str(jobid)+"_part-00"+str(partNumber).zfill(3)+"-of-00500.csv"
         print file_name
         if os.stat(file_name).st_size == 0:
             arrVectorJobid.append(0)
