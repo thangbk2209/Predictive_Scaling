@@ -22,4 +22,4 @@ for jobid in JobIdArr:
         arrVectorJobid.append(1)
   newDf = pd.DataFrame(arrVectorJobid)
 # df1 = newDf.replace(np.nan, 0, regex=True)
-  newDf.to_csv('thangbk2209/Predictive_Scaling/results/%s.csv'%(jobid), index=False, header=None)
+  newDf.to_csv('/home/hunter/spark/spark-2.2.0-bin-hadoop2.7/thangbk2209/Predictive_Scaling/results/%s.csv'%(jobid), index=False, header=None)
