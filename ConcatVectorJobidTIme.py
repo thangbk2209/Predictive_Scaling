@@ -10,16 +10,11 @@ numberOfJob = 0
 fout=open("results/vectorTimeJobid.csv","a")
 for jobid in JobIdArr:
     numberOfJob += 1
-    arrVectorJobid = []
+
     if numberOfJob == 284:
         break
-    for partNumber in range(0,500):
-        file_name = str(jobid)+"_part-00"+str(partNumber).zfill(3)+"-of-00500.csv"
-        print file_name
-        if os.stat(file_name).st_size == 0:
-            arrVectorJobid.append(0)
-        else:
-            arrVectorJobid.append(1)
-    newDf = pd.DataFrame(arrVectorJobid)
-# df1 = newDf.replace(np.nan, 0, regex=True)
-    newDf.to_csv('/home/hunter/spark/spark-2.2.0-bin-hadoop2.7/thangbk2209/Predictive_Scaling/results/%s.csv'%(jobid), index=False, header=None)
+    f = open("results/%s.csv"%(jobid))
+    for line in f:
+         fout.write(line)
+    f.close() # not really needed
+fout.close()
