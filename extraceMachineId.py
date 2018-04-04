@@ -16,7 +16,7 @@ dataSchema = StructType([StructField('timeStamp', StringType(), True),
                          StructField('machineId', LongType(), True),
                          StructField('eventType', StringType(), True),
                          StructField('platformId', StringType(), True),
-                         StructField('cpu', floatType(), True),
+                         StructField('cpu', FloatType(), True),
                          StructField('memory', FloatType(), True)])
 file_name = 'machine_events.csv'
 df = (
