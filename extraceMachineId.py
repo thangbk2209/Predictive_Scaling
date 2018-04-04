@@ -13,7 +13,7 @@ sql_context = SQLContext(sc)
 folder_path = '/home/hunter/GoogleCluster/machine_events/'
 
 dataSchema = StructType([StructField('timeStamp', StringType(), True),
-                         StructField('machineId', LongType(), True),
+                         StructField('machineId', StringType(), True),
                          StructField('eventType', StringType(), True),
                          StructField('platformId', StringType(), True),
                          StructField('cpu', FloatType(), True),
