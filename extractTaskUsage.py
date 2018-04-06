@@ -36,21 +36,18 @@ dataSchema = StructType([StructField('startTime', StringType(), True),
                          StructField('agg_type', FloatType(), True),
                          StructField('sampled_cpu_usage', FloatType(), True)])
 
-# for file_name in os.listdir(folder_path):
-df = (
-    sql_context.read
-    .format('com.databricks.spark.csv')
-    .schema(dataSchema)
-    .load("%s"%(folder_path))
-)
-df.createOrReplaceTempView("dataFrame")
-# df.printSchema()
-for i in range(len(startTimeArr)):
-    start = startTimeArr[i][0]
-    print start
+for file_name in os.listdir(folder_path):
+    df = (
+        sql_context.read
+        .format('com.databricks.spark.csv')
+        .schema(dataSchema)
+        .load("%s%s"%(folder_path,file_name))
+    )
+    df.createOrReplaceTempView("dataFrame")
+    # df.printSchema()
     sumCPUUsage = sql_context.sql("SELECT startTime/1000000 , endTime/1000000, JobId, taskIndex, machineId, meanCPUUsage,AssignMem,mean_diskIO_time,mean_local_disk_space from dataFrame where startTime=%s order by startTime/1000000 ASC"%(start))
 
     schema_df = ["startTime","endTime", "JobId","TaskIndex","machineId","meanCPU","meanMemory","AssignMem","mean_diskIO","mean_local_disk_space"]
-    sumCPUUsage.toPandas().to_csv('thangbk2209/task_usage/%s.csv'%(start), index=False, header=None)
+    sumCPUUsage.toPandas().to_csv('thangbk2209/task_usage/%s'%(file_name), index=False, header=None)
 
 sc.stop()
