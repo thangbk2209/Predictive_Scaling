@@ -5,7 +5,7 @@ from pandas import read_csv
 folder_path = '/home/hunter/GoogleCluster/task_usage_extract/'
 allTask = 0
 for file_name in os.listdir(folder_path):
-    row_count = sum(1 for row in fileObject)
+    row_count = sum(1 for row in file_name)
     allTask += row_count
 print allTask
 # colnames = ['jobId','numberOfTask'] 
